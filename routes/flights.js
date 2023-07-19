@@ -1,9 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+var flightsCtrl = require('../controllers/flights');
+
+
+//AL ROUTES DEFAULT TO /FLIGHTS
+router.get('/new', flightsCtrl.new);
+
+router.post('/', flightsCtrl.create);
+
+//Get route for /flights INDEX ROUTE
+
+router.get('/', flightsCtrl.index);
+
+router.get('/:id', flightsCtrl.show);
 
 module.exports = router;
