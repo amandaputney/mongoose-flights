@@ -1,5 +1,5 @@
-const Performer = require('../models/ticket');
-const Movie = require('../models/flight');
+const Ticket = require('../models/ticket');
+const Flight = require('../models/flight');
 
 module.exports = {
   new: newTicket,
@@ -10,7 +10,7 @@ module.exports = {
 async function addToFlight(req, res) {
   const flight = await Flight.findById(req.params.id);
   // The cast array holds the performer's ObjectId (referencing)
-  flight.cast.push(req.body.ticketId);
+  ticket.flight.push(req.body.ObjectId);
   await flight.save();
   res.redirect(`/flights/${flight._id}`);
 }

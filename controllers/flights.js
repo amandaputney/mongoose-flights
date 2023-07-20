@@ -1,17 +1,16 @@
 const Flight = require('../models/flight')
-const express = require('express');
-const ticket = require('../models/ticket');
-const router = express.Router()
+// const express = require('express');
+const Ticket = require('../models/ticket');
+// const router = express.Router()
 
 module.exports = {
-    new: newFlight, create, index, show
+    new: newFlight, create, index, show, new: newTicket
 }
 
 async function index(req, res) {
     const flights = await Flight.find({});
     res.render('flights/index', { title: 'All Flights', flights });
 }
-
 
 //NEED TO UPDATE show function to retreive ticket
 // async function show(req, res) {
@@ -26,8 +25,15 @@ async function index(req, res) {
 // }
 
 async function show(req, res) {
-    const flight = await Flight.findById(req.params.id);
-    res.render('flights/show', { title: 'Flight Detail', flight });
+    // const flight = await Flight.findById(req.params.id);
+    // res.render('flights/show', { title: 'Flight Detail', flight });
+    const flight = Flight.findById(req.params.id, function(err, flight) {
+     Ticket.find({flight: flight._id}, function(err, ticket) {
+        // res.render('flights/show', 'tickets/show', { title: 'Flight Detail', flight });
+        res.render('flights/show',  { title: 'Flight Detail', flight, ticket });
+        // res.render('tickets/show');
+     });
+ });
 }
 
 function newFlight(req, res) {
@@ -72,3 +78,14 @@ async function create(req, res) {
 //         flights: Flight.getAll()
 //     })
 // }
+
+function newTicket(req, res) {
+    res.render('tickets/new', { errorMsg: '' });
+    const newTicket = new Ticket();
+    // Obtain the default date
+    const dt = newTicket.arrives;
+    // Format the date for the value attribute of the input
+    let arrivesDate = `${dt.getFullYear()}-${(dt.getMonth() + 1).toString().padStart(2, '0')}`;
+    arrivesDate += `-${dt.getDate().toString().padStart(2, '0')}T${dt.toTimeString().slice(0, 5)}`;
+    res.render('tickets/new', { });
+};
