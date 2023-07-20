@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+
+    <div>Before adding, please ensure that the seat is not already reserved:</div>
+    <section id="badge-container">
+        <% tickets.forEach(function(t) { %>
+            <article class="badge">
+                <%= t.tickets %>
+            </article>
+            <% }) %>
+    </section>
+
+    <form id="add-tix-to-flight" action="/flights" method="POST">
+        <label>Seat:</label>
+        <input name="seat" required pattern="[A-F][1-9]\d?">
+        <label>Price:</label>
+        <input type="Number" name="born">
+        <input type="submit" value="Choose Seat">
+    </form>
+
+    <%- include('../partials/footer') %>

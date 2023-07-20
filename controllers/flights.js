@@ -1,5 +1,6 @@
-const Flight = require('../models/flights')
-const express = require('express')
+const Flight = require('../models/flight')
+const express = require('express');
+const ticket = require('../models/ticket');
 const router = express.Router()
 
 module.exports = {
@@ -10,6 +11,19 @@ async function index(req, res) {
     const flights = await Flight.find({});
     res.render('flights/index', { title: 'All Flights', flights });
 }
+
+
+//NEED TO UPDATE show function to retreive ticket
+// async function show(req, res) {
+  // Populate the cast array with performer docs instead of ObjectIds
+//   const flight = await Flight.findById(req.params.id).populate('seat');
+//   // Mongoose query builder approach to retrieve performers not the movie:
+    // Performer.find({}).where('_id').nin(movie.cast)
+  // The native MongoDB approach uses a query object to find 
+  // performer docs whose _ids are not in the movie.cast array like this:
+//   const tickets = await Ticket.find({ _id: { $nin: ticket.seat } });
+//   res.render('flights/show', { title: 'Flight Detail', flight, tickets });
+// }
 
 async function show(req, res) {
     const flight = await Flight.findById(req.params.id);

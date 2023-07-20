@@ -1,29 +1,42 @@
 <%- include('../partials/header') %>
 
+
+<!-- FLIGHT DETAILS -->
     <section id="show-page">
-        <div>Airline: </div>
-        <div>
+        <br><br>
+        <div>Airline: 
             <%= flight.airline %>
         </div>
-        <div>Airport: </div>
-        <div>
-            <%= flight.airport %>
+        <br><br>
+        <div>Flight Number: 
+            <%= flight.flightNo %>
         </div>
-        <div>Departs: </div>
-        <div>
-            <%= flight.depart %>
+        <br><br>
+        <div>Airport:   <%= flight.airport %>
         </div>
-
-
+        <br><br>
+        <div>Departs: 
+            <%= flight.departs %>
+        </div>
+        <br><br>
+        <div>Arrives:
+            <%= flight.destinations %>
+        </div>
     </section>
+
+
+
+
+
+<!-- DESTINATION FORM -->
     <section>
         <br><br>
-        <h2>Destinations</h2>
+        <h2>Destination</h2>
         <form id="add-destination-form" method="POST" action="/flights/<%= flight._id %>/destinations">
-            <label>Destination:</label>
+            <!-- <label>Destination:</label> -->
             <select name="airport">
                 <option value="AUS">AUS</option>
-                <option value="DEN">DFW</option>
+                <option value="DEN">DEN</option>
                 <option value="DFW">DFW</option>
                 <option value="LAX">LAX</option>
             </select>
